@@ -1,0 +1,751 @@
+<html>
+<head>
+
+    <meta charset="UTF-8">
+
+<title>3F | 南高祭2026</title>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap" rel="stylesheet">
+    
+<style>
+    .page-header {
+    background: #00469b;
+    padding: 15px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    color: white;
+    text-decoration: none;
+
+    font-size: 2rem;
+
+    font-family:
+        "Yuji Syuku",
+        serif;
+
+    transition: 0.3s;
+}
+
+.site-title:hover {
+    color: #dbe8ff;
+}
+    
+    .menu-button {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    user-select: none;
+}
+
+#menu {
+
+    display: none;
+
+    background: white;
+
+    position: fixed;
+
+    top: 70px;
+    right: 20px;
+
+    width: 250px;
+
+    max-height: 70vh;
+
+    overflow-y: auto;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.2);
+
+    z-index: 9999;
+}
+
+#menu a {
+    display: block;
+
+    padding: 15px 30px;
+
+    color: #00469b;
+    text-decoration: none;
+
+    transition:
+    background 0.3s,
+    color 0.3s,
+    transform 0.3s;
+}
+
+#menu::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+#menu::-webkit-scrollbar-thumb {
+
+    background: #00469b;
+
+    border-radius: 999px;
+}
+
+#menu a:hover {
+    background: #00469b;
+    color: white;
+
+    transform: translateX(-5px);
+}
+
+#menu a:active {
+    background: #002d66;
+    color: white;
+
+    transform: scale(0.95);
+}
+
+.menu-button {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    user-select: none;
+
+    transition: 0.3s;
+}
+
+.menu-button:hover {
+    color: #dbe8ff;
+}
+
+/* タイトル */
+
+.page-title {
+
+    text-align: center;
+
+    color: #00469b;
+
+    margin-top: 40px;
+
+    font-size: 2.5rem;
+}
+
+/* マップ */
+
+.map-container {
+
+    position: relative;
+
+    width: 95%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+.map-image {
+
+    width: 100%;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* 教室 */
+
+.room {
+
+    position: absolute;
+
+    width: 90px;
+    height: 60px;
+
+    background:
+        rgba(255,255,255,0.8);
+
+    border: 3px solid #00469b;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: bold;
+
+    color: #00469b;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.room:hover {
+
+    background: #00469b;
+
+    color: white;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* 下の教室位置 */
+
+.room {
+
+    width: 8%;
+    height: 7%;
+}
+
+/* 共通 */
+
+.room {
+
+    position: absolute;
+
+    width: 9%;
+    height: 10%;
+
+    background: rgba(255,255,255,0.2);
+
+    border: 3px solid #00469b;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: bold;
+
+    color: #00469b;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.room:hover {
+
+    background: #00469b;
+
+    color: white;
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* 305 */
+
+.room305 {
+
+    top: 69%;
+
+    left: 88.3%;
+
+    height: 27.7%;
+
+    width: 8.5%;
+}
+
+/* 306 */
+
+.room306 {
+
+    top: 83.6%;
+
+    left: 76.8%;
+
+    width: 8%;
+
+    height: 11%;
+}
+
+/* 301 */
+
+.room301 {
+
+    top: 83.8%;
+
+    left: 66.6%;
+
+    height: 11%;
+}
+
+/* 303 */
+
+.room303 {
+
+    top: 83.6%;
+
+    left: 56.3%;
+
+    height: 11%;
+}
+
+/* 207 */
+
+.room207 {
+
+    top: 83.8%;
+
+    left: 44.5%;
+
+    height: 12%;
+
+    width: 11%;
+}
+
+/* 104 */
+
+.room104 {
+
+    top: 84.4%;
+
+    left: 34.8%;
+}
+
+/* 103 */
+
+.room103 {
+
+    top: 84.4%;
+
+    left: 24.0%;
+
+    width: 10%;
+}
+
+/* 108 */
+
+.room108 {
+
+    top: 84.4%;
+
+    left: 14.8%;
+}
+
+/* 107 */
+
+.room107 {
+
+    top: 83.5%;
+
+    left: 2.5%;
+
+    height: 13.7%;
+
+    width: 8.4%;
+}
+
+/* ポップアップ */
+
+#popup {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.5);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 2000;
+}
+
+.popup-content {
+
+    background: white;
+
+    width: 320px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.popup-title {
+
+    color: #00469b;
+}
+
+.popup-link {
+
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    background: #00469b;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+}
+
+.popup-link:hover {
+
+    background: #002d66;
+}
+
+/* 背景暗転 */
+
+#overlay{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:
+        rgba(0,0,0,0.5);
+
+    z-index:998;
+}
+
+/* ポップアップ */
+
+.popup{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:white;
+
+    width:320px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    z-index:999;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.3);
+}
+
+.popup h2{
+
+    color:#00469b;
+}
+
+.popup a{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    color:#00469b;
+
+    font-weight:bold;
+
+    text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+    <header class="page-header">
+
+    <a href="home.html" class="site-title">
+        南高祭2026
+    </a>
+
+    <div class="menu-button" onclick="toggleMenu()">
+        ☰
+    </div>
+
+</header>
+
+<nav id="menu">
+
+    <a href="home.html">ホーム</a>
+
+    <a href="access.html">交通アクセス</a>
+
+    <a href="stage.html">ステージ発表</a>
+
+    <a href="exhibition.html">展示一覧</a>
+
+    <a href="vacancy.html">空き情報</a>
+
+    <a href="rule.html">校内ルール</a>
+
+    <a href="3f.html">3F</a>
+
+    <a href="4f.html">4F</a>
+
+    <a href="5f.html">5F</a>
+
+</nav>
+    
+    <h1 class="page-title">
+    3F 展示マップ
+    </h1>
+<div class="map-container">
+
+    <img
+    src="3fmap2.png"
+    class="map-image">
+
+<!-- ポップアップ -->
+
+<div
+class="room room305"
+onclick="openRoom(
+'108教室',
+'ジュラシック・ワールド　〜南の大地〜',
+'305.html'
+)">
+ジュラシック・ワールド　〜南の大地〜
+</div>
+
+<div
+class="room room306"
+onclick="openRoom(
+'107教室',
+'未設定',
+'306.html'
+)">
+306
+</div>
+
+<div
+class="room room301"
+onclick="openRoom(
+'106教室',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+301
+</div>
+
+<div
+class="room room303"
+onclick="openRoom(
+'105教室',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+303
+</div>
+
+<div
+class="room room207"
+onclick="openRoom(
+'3Fホール',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+207
+</div>
+
+<div
+class="room room104"
+onclick="openRoom(
+'104教室',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+104
+</div>
+
+<div
+class="room room103"
+onclick="openRoom(
+'103教室',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+103
+</div>
+
+<div
+class="room room108"
+onclick="openRoom(
+'102教室',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+108
+</div>
+
+<div
+class="room room107"
+onclick="openRoom(
+'101教室',
+'3年5組 お化け屋敷',
+'305.html'
+)">
+107
+</div>
+<!-- オーバーレイ -->
+
+<div id="overlay"
+onclick="closePopup()">
+</div>
+
+<!-- 教室ポップアップ -->
+
+<div id="room-popup"
+class="popup">
+
+    <h2 id="popup-title">
+        教室名
+    </h2>
+
+    <p id="popup-content">
+        内容
+    </p>
+
+    <a
+    id="popup-link"
+    href="#">
+
+        詳しく見る →
+
+    </a>
+
+</div>
+
+<script>
+
+function toggleMenu() {
+
+    /* ポップアップ */
+
+function openPopup(
+    title,
+    className,
+    wait,
+    link
+) {
+
+    document.getElementById("popup")
+        .style.display = "flex";
+
+    document.getElementById("popup-title")
+        .innerText = title;
+
+    document.getElementById("popup-class")
+        .innerText =
+            "発表クラス：" + className;
+
+    document.getElementById("popup-wait")
+        .innerText =
+            "待ち時間：" + wait;
+
+    document.getElementById("popup-link")
+        .href = link;
+}
+
+/* 外押したら閉じる */
+
+document.getElementById("popup")
+.addEventListener("click", function(e) {
+
+    if(e.target.id === "popup") {
+
+        this.style.display = "none";
+    }
+
+});
+
+    const menu = document.getElementById("menu");
+
+    if(menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+
+}
+
+function openRoom(
+    title,
+    content,
+    link
+){
+
+    document
+    .getElementById("popup-title")
+    .innerText = title;
+
+    document
+    .getElementById("popup-content")
+    .innerText = content;
+
+    document
+    .getElementById("popup-link")
+    .href = link;
+
+    document
+    .getElementById("overlay")
+    .style.display = "block";
+
+    document
+    .getElementById("room-popup")
+    .style.display = "block";
+}
+
+function closePopup(){
+
+    document
+    .getElementById("overlay")
+    .style.display = "none";
+
+    document
+    .getElementById("room-popup")
+    .style.display = "none";
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<html>
+<head>
+
+    <meta charset="UTF-8">
+
+<title>5F | 南高祭2026</title>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap" rel="stylesheet">
+    
+<style>
+    .page-header {
+    background: #00469b;
+    padding: 15px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    color: white;
+    text-decoration: none;
+
+    font-size: 2rem;
+
+    font-family:
+        "Yuji Syuku",
+        serif;
+
+    transition: 0.3s;
+}
+
+.site-title:hover {
+    color: #dbe8ff;
+}
+
+    .menu-button {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    user-select: none;
+}
+
+#menu {
+    display: none;
+
+    background: white;
+
+    position: absolute;
+    top: 70px;
+    right: 20px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+#menu a {
+    display: block;
+
+    padding: 15px 30px;
+
+    color: #00469b;
+    text-decoration: none;
+
+    transition:
+    background 0.3s,
+    color 0.3s,
+    transform 0.3s;
+}
+
+#menu::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+#menu::-webkit-scrollbar-thumb {
+
+    background: #00469b;
+
+    border-radius: 999px;
+}
+
+#menu a:hover {
+    background: #00469b;
+    color: white;
+
+    transform: translateX(-5px);
+}
+
+#menu a:active {
+    background: #002d66;
+    color: white;
+
+    transform: scale(0.95);
+}
+
+.menu-button {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    user-select: none;
+
+    transition: 0.3s;
+}
+
+.menu-button:hover {
+    color: #dbe8ff;
+}
+
+/* タイトル */
+
+.page-title {
+
+    text-align: center;
+
+    color: #00469b;
+
+    margin-top: 40px;
+
+    font-size: 2.5rem;
+}
+
+/* マップ */
+
+.map-container {
+
+    position: relative;
+
+    width: 95%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+.map-image {
+
+    width: 100%;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* 教室 */
+
+.room {
+
+    position: absolute;
+
+    width: 90px;
+    height: 60px;
+
+    background:
+        rgba(255,255,255,0.8);
+
+    border: 3px solid #00469b;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: bold;
+
+    color: #00469b;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.room:hover {
+
+    background: #00469b;
+
+    color: white;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* 下の教室位置 */
+
+.room {
+
+    width: 8%;
+    height: 7%;
+}
+
+/* 共通 */
+
+.room {
+
+    position: absolute;
+
+    width: 9%;
+    height: 10%;
+
+    background: rgba(255,255,255,0.2);
+
+    border: 3px solid #00469b;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: bold;
+
+    color: #00469b;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.room:hover {
+
+    background: #00469b;
+
+    color: white;
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* 305 */
+
+.room305 {
+
+    top: 8%;
+
+    left: 89.3%;
+
+    height: 87%;
+
+    width: 8.7%;
+}
+
+/* 306 */
+
+.room306 {
+
+    top: 50.2%;
+
+    left: 76.6%;
+
+    width: 9.8%;
+
+    height: 35%;
+}
+
+/* 301 */
+
+.room301 {
+
+    top: 50.2%;
+
+    left: 66.5%;
+
+    width: 9.8%;
+
+    height: 35%;
+}
+
+/* 303 */
+
+.room303 {
+
+    top: 50.2%;
+
+    left: 56%;
+
+    width: 9.8%;
+
+    height: 35%;
+}
+
+/* 207 */
+
+.room207 {
+
+    top: 50.2%;
+
+    left: 44.2%;
+
+    height: 38.5%;
+
+    width: 11.5%;
+}
+
+/* 104 */
+
+.room104 {
+
+    top: 50.2%;
+
+    left: 34.3%;
+
+    height: 32.7%;
+
+    width: 9.6%;
+}
+
+/* 103 */
+
+.room103 {
+
+    top: 50.2%;
+
+    left: 24.0%;
+
+    width: 20%;
+
+    height: 35%;
+}
+
+/* 108 */
+
+.room108 {
+
+    top: 50.2%;
+
+    left: 13.5%;
+
+    height: 35%;
+
+    width: 10%;
+}
+
+/* 107 */
+
+.room107 {
+
+    top: 5%;
+
+    left: 1%;
+
+    height: 87%;
+}
+
+/* ポップアップ */
+
+#popup {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.5);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 2000;
+}
+
+.popup-content {
+
+    background: white;
+
+    width: 320px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.popup-title {
+
+    color: #00469b;
+}
+
+.popup-link {
+
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    background: #00469b;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+}
+
+.popup-link:hover {
+
+    background: #002d66;
+}
+</style>
+</head>
+<body>
+    <header class="page-header">
+
+    <a href="home.html" class="site-title">
+        南高祭2026
+    </a>
+
+    <div class="menu-button" onclick="toggleMenu()">
+        ☰
+    </div>
+
+</header>
+
+<nav id="menu">
+
+    <a href="home.html">ホーム</a>
+
+    <a href="access.html">交通アクセス</a>
+
+    <a href="stage.html">ステージ発表</a>
+
+    <a href="exhibition.html">展示一覧</a>
+
+    <a href="vacancy.html">空き情報</a>
+
+    <a href="rule.html">校内ルール</a>
+
+    <a href="3f.html">3F</a>
+
+    <a href="4f.html">4F</a>
+
+    <a href="5f.html">5F</a>
+
+</nav>
+    
+    <h1 class="page-title">5F 展示マップ</h1>
+
+<div class="map-container">
+
+    <img
+    src="5fmap2.png"
+    class="map-image">
+
+   <div class="room room305">302</div>
+
+<div class="room room306">101</div>
+
+<div class="room room301">よろずや同好会</div>
+
+<div class="room room303">クイズ研究会</div>
+
+<div class="room room207">ポスター会場</div>
+
+<div class="room room103">飲食会場</div>
+
+<div class="room room108">語学研究会/飲食会場</div>
+
+<div class="room room107">307</div>
+
+</div>
+
+<script>
+
+function toggleMenu() {
+
+    const menu = document.getElementById("menu");
+
+    if(menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+
+}
+
+</script>
+</body>
+</html>
