@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>管理画面 | 南高祭2026</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#f5f5f5;
+    font-family:sans-serif;
+}
+
+/* ヘッダー */
+
+header{
+    background:#00469b;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    margin:0;
+}
+
+/* 学年ボタン */
+
+.grade-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-top:50px;
+
+    flex-wrap:wrap;
+}
+
+.grade-btn{
+
+    width:220px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:white;
+
+    font-size:2rem;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.15);
+}
+
+.grade-btn:hover{
+
+    background:#00469b;
+
+    color:white;
+
+    transform:translateY(-5px);
+}
+
+/* ポップアップ */
+
+.popup{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:400px;
+
+    max-height:500px;
+
+    overflow-y:auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    z-index:9999;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 背景 */
+
+.overlay{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.5);
+
+    z-index:9998;
+}
+
+/* クラス */
+
+.class-box{
+
+    background:#f8f8f8;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+}
+
+.class-title{
+
+    font-size:1.5rem;
+
+    font-weight:bold;
+
+    color:#00469b;
+
+    margin-bottom:10px;
+}
+
+.project{
+
+    margin-bottom:10px;
+
+    color:#333;
+}
+
+.time{
+
+    margin-bottom:15px;
+
+    color:#666;
+}
+
+input{
+
+    width:100%;
+
+    padding:12px;
+
+    font-size:1rem;
+
+    border-radius:10px;
+
+    border:1px solid #ccc;
+
+    box-sizing:border-box;
+}
+
+button{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#00469b;
+
+    color:white;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+
+    background:#002d66;
+}
+
+.close-btn{
+
+    background:#999;
+}
+
+.close-btn:hover{
+
+    background:#666;
+}
+
+/* ホームへ戻る */
+
+.home-back{
+
+    text-align:center;
+
+    margin-top:20px;
+}
+
+.home-back a{
+
+    display:inline-block;
+
+    background:#00469b;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 24px;
+
+    border-radius:12px;
+
+    transition:0.3s;
+
+    font-weight:bold;
+}
+
+.home-back a:hover{
+
+    background:#002d66;
+
+    transform:translateY(-3px);
+}
+
+#news-list{
+
+    margin-top:15px;
+}
+
+.news-admin-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:white;
+
+    padding:12px 16px;
+
+    margin-top:10px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.1);
+}
+
+.delete-btn{
+
+    background:red;
+
+    color:white;
+
+    border:none;
+
+    border-radius:50%;
+
+    width:30px;
+
+    height:30px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+
+    transform:scale(1.1);
+
+    background:#cc0000;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>管理画面</h1>
+</header>
+
+<div class="home-back">
+
+    <a href="index.html">
+        ← ホームへ戻る
+    </a>
+
+</div>
+<div class="class-box">
+
+    <div class="class-title">
+        リアルタイムお知らせ
+    </div>
+
+    <input
+    type="text"
+    id="newsInput"
+    placeholder="お知らせを入力">
+
+    <button onclick="saveNews()">
+        お知らせ保存
+    </button>
+
+</div>
+
+    <div class="class-box">
+
+    <div class="class-title">
+        現在のお知らせ
+    </div>
+
+    <div id="news-list">
+
+    </div>
+
+</div>
+
+<!-- 学年ボタン -->
+
+<div class="grade-container">
+
+    <div class="grade-btn"
+        onclick="openPopup('grade1')">
+        1年
+    </div>
+
+    <div class="grade-btn"
+        onclick="openPopup('grade2')">
+        2年
+    </div>
+
+    <div class="grade-btn"
+        onclick="openPopup('grade3')">
+        3年
+    </div>
+
+</div>
+
+<!-- 背景 -->
+
+<div class="overlay"
+    id="overlay"
+    onclick="closePopup()">
+</div>
+
+<!-- 1年 -->
+
+<div class="popup" id="grade1">
+
+<h2>1年</h2>
+
+<!-- =========================
+1年1組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年1組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-1"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年1組',5,'1-1')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年2組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年2組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-2"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年2組',5,'1-2')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年3組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年3組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-3"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年3組',5,'1-3')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年4組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年4組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-4"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年4組',5,'1-4')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年5組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年5組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-5"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年5組',5,'1-5')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年6組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年6組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-6"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年6組',5,'1-6')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年7組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年7組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-7"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年7組',5,'1-7')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+1年8組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">1年8組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="1-8"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('1年8組',5,'1-8')">
+保存
+</button>
+
+</div>
+
+    <button
+class="close-btn"
+onclick="closePopup()">
+閉じる
+</button>
+
+</div>
+<!-- 2年 -->
+
+<div class="popup" id="grade2">
+
+    <!-- =========================
+2年1組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年1組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-1"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年1組',5,'2-1')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年2組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年2組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-2"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年2組',5,'2-2')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年3組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年3組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-3"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年3組',5,'2-3')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年4組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年4組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-4"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年4組',5,'2-4')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年5組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年5組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-5"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年5組',5,'2-5')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年6組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年6組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-6"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年6組',5,'2-6')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年7組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年7組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-7"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年7組',5,'2-7')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+2年8組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">2年8組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="2-8"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('2年8組',5,'2-8')">
+保存
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- 3年 -->
+
+<div class="popup" id="grade3">
+
+    <!-- =========================
+3年1組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年1組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-1"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年1組',5,'3-1')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年2組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年2組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-2"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年2組',5,'3-2')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年3組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年3組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-3"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年3組',5,'3-3')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年4組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年4組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-4"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年4組',5,'3-4')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年5組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年5組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-5"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年5組',5,'3-5')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年6組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年6組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-6"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年6組',5,'3-6')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年7組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年7組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-7"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年7組',5,'3-7')">
+保存
+</button>
+
+</div>
+
+<!-- =========================
+3年8組
+========================= -->
+
+<div class="class-box">
+
+<div class="class-title">3年8組</div>
+
+<div class="project">ここに発表タイトル</div>
+
+<div class="time">
+1組あたり：約5分
+</div>
+
+<input type="number"
+id="3-8"
+placeholder="現在の待ち組数">
+
+<button onclick="saveData('3年8組',5,'3-8')">
+保存
+</button>
+
+</div>
+
+<button
+class="close-btn"
+onclick="closePopup()">
+閉じる
+</button>
+
+</div>
+
+<!-- Firebase -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+set,
+push,
+remove,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+/* Firebase設定 */
+
+const firebaseConfig = {
+
+apiKey: "ここ",
+
+authDomain: "ここ",
+
+projectId: "ここ",
+
+storageBucket: "ここ",
+
+messagingSenderId: "ここ",
+
+appId: "ここ",
+
+databaseURL:
+"https://nankousai2026-default-rtdb.asia-southeast1.firebasedatabase.app"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+/* ポップアップ */
+
+window.openPopup = function(id){
+
+    document.getElementById(id)
+        .style.display = "block";
+
+    document.getElementById("overlay")
+        .style.display = "block";
+}
+
+window.closePopup = function(){
+
+    const popups =
+        document.querySelectorAll(".popup");
+
+    popups.forEach(popup => {
+
+        popup.style.display = "none";
+    });
+
+    document.getElementById("overlay")
+        .style.display = "none";
+}
+
+/* 保存 */
+
+window.saveData =
+async function(className,time,id){
+
+    const groups =
+        Number(
+            document.getElementById(id).value
+        );
+
+    const wait =
+        groups * time;
+
+    await set(
+        ref(db,"vacancy/" + className),
+        {
+
+            className: className,
+
+            groups: groups,
+
+            timePerGroup: time,
+
+            waitTime: wait
+        }
+    );
+
+    alert(className + " を保存しました！");
+}
+
+/* お知らせ保存 */
+
+window.saveNews =
+async function(){
+
+    const text =
+        document
+        .getElementById("newsInput")
+        .value;
+
+    if(text === ""){
+
+        alert("お知らせを入力してください");
+
+        return;
+    }
+
+    await push(
+        ref(db,"news"),
+        {
+            text:text
+        }
+    );
+
+    alert("お知らせを保存しました！");
+
+    document
+        .getElementById("newsInput")
+        .value = "";
+}
+
+window.saveStage =
+async function(day,time,name,type){
+
+    await push(
+        ref(db,"stage/" + day),
+        {
+            time:time,
+            name:name,
+            type:type
+        }
+    );
+
+    alert(name + " を追加しました！");
+}
+
+window.addDay1Stage =
+async function(){
+
+    const stages = [
+
+        ["10:10〜10:25","吹奏楽部","吹奏楽"],
+        ["10:35〜10:50","日常ヴィンテージ","バンド"],
+        ["11:00〜11:15","Icy Drop","バンド"],
+        ["11:25〜11:40","1st","ダンス"],
+        ["11:50〜12:05","モノノ Aw@rE","バンド"],
+        ["12:15〜12:30","クイ研バンド","バンド"],
+        ["12:40〜12:55","Stylish Delay","バンド"],
+        ["13:05〜13:20","miniLiFE!","ダンス"],
+        ["13:30〜13:45","Purple Apple","バンド"],
+        ["13:55〜14:10","縄文土器づくり","劇"],
+        ["14:20〜14:35","Pascal","バンド"]
+
+    ];
+
+    for(const s of stages){
+
+        await push(
+            ref(db,"stage/day1"),
+            {
+                time:s[0],
+                name:s[1],
+                type:s[2]
+            }
+        );
+    }
+
+    alert("7/4ステージを登録しました！");
+}
+
+window.addDay2Stage =
+async function(){
+
+    const stages = [
+
+        ["09:45〜09:55","Prisma","バンド"],
+        ["10:05〜10:20","Joynvolve","バンド"],
+        ["10:30〜10:45","mila.","バンド"],
+        ["10:55〜11:10","TOYA","ボイパ"],
+        ["11:25〜11:40","神楽","ダンス"],
+        ["11:55〜12:10","仲間を得た中尾","バンド"],
+        ["12:20〜12:35","レノ","バンド"],
+        ["12:45〜13:00","ササキーズ","バンド"]
+
+    ];
+
+    for(const s of stages){
+
+        await push(
+            ref(db,"stage/day2"),
+            {
+                time:s[0],
+                name:s[1],
+                type:s[2]
+            }
+        );
+    }
+
+    alert("7/5ステージを登録しました！");
+}
+
+/* お知らせ一覧表示 */
+
+const newsListRef =
+    ref(db,"news");
+
+onValue(newsListRef,(snapshot)=>{
+
+    const data =
+        snapshot.val();
+
+    const list =
+        document.getElementById("news-list");
+
+    list.innerHTML = "";
+
+    if(!data) return;
+
+    Object.entries(data).forEach(([key,value])=>{
+
+        list.innerHTML += `
+
+        <div class="news-admin-item">
+
+            <span>
+                ${value.text}
+            </span>
+
+            <button
+            class="delete-btn"
+            onclick="deleteNews('${key}')">
+
+                ×
+
+            </button>
+
+        </div>
+        `;
+    });
+});
+
+/* お知らせ削除 */
+
+window.deleteNews =
+async function(key){
+
+    await remove(
+        ref(db,"news/" + key)
+    );
+
+    alert("削除しました");
+}
+</script>
+
+</body>
+</html>
