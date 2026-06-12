@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+    <title>南高祭2026</title>
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+        body { font-family: sans-serif; margin: 0; }
+        header { background: #00469b; color: white; padding: 20px; text-align: center; }
+.main-title{
+
+    margin: 0;
+
+    font-size: 3rem;
+
+    font-family:
+        "Yuji Syuku",
+        serif;
+
+    text-align: center;
+
+    line-height: 80px;
+}
+
+.sub-title{
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #dbe8ff;
+
+    font-family:
+        "Yuji Syuku",
+        serif;
+}
+        /* スライダー */
+
+.slider {
+
+    position: relative;
+
+    width: 80%;
+
+    height: 320px;
+
+    margin: 40px auto;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.2);
+}
+
+.slide {
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transition: opacity 1s;
+}
+
+.slide.active {
+
+    opacity: 1;
+}
+        .container { display: flex; gap: 20px; padding: 20px; justify-content: center; }
+        .card {
+
+    border: 1px solid #ddd;
+
+    width: 170px;
+
+    padding: 10px;
+
+    margin: 10px;
+
+    border-radius: 8px;
+
+    background: white;
+
+    transition: 0.3s;
+
+    cursor: pointer;
+
+    text-align: center;
+}
+
+.card:hover {
+    background: #00469b;
+    color: white;
+
+    transform: translateY(-5px);
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+        .card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.top-container {
+
+    width: 95%;
+
+    margin: 40px auto;
+
+    display: flex;
+
+    justify-content: space-evenly;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+}
+.floor-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    margin-top: 25px;
+}
+
+.small-card {
+    width: 120px;
+}
+
+.top-menu {
+
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.top-menu a {
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 1.1rem;
+
+    transition: 0.3s;
+}
+
+.top-menu a:hover {
+
+    color: #ffe066;
+
+    transform: translateY(-3px);
+}
+
+/* タイトル */
+
+.page-title {
+
+    text-align: center;
+
+    color: #00469b;
+
+    margin-top: 40px;
+
+    font-size: 2.5rem;
+}
+
+/* 公開時間 */
+
+.schedule {
+
+    text-align: center;
+
+    font-size: 1.5rem;
+
+    font-weight: bold;
+
+    line-height: 2;
+
+    color: #00469b;
+}
+
+/* ステージ情報 */
+
+.live-stage {
+
+    width: 80%;
+
+    margin: 60px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+}
+
+.stage-box {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    width: 320px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.15);
+
+    transition: 0.3s;
+}
+
+.stage-box:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.2);
+}
+
+.stage-label {
+
+    font-size: 1rem;
+
+    color: #666;
+
+    margin-bottom: 10px;
+}
+
+.stage-group {
+
+    font-size: 2rem;
+
+    font-weight: bold;
+
+    color: #00469b;
+
+    margin-bottom: 15px;
+}
+
+.stage-time {
+
+    font-size: 1.1rem;
+
+    color: #333;
+}
+
+/* タイトル＋検索 */
+
+.header-top{
+
+    position: relative;
+
+    width: 100%;
+
+    height: 80px;
+}
+
+/* USJ風検索 */
+
+.search-area{
+
+    position:absolute;
+
+    top:20px;
+
+    right:30px;
+
+    display:flex;
+
+    align-items:center;
+}
+
+/* 入力欄 */
+
+.search-area input{
+
+    width:0;
+
+    opacity:0;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:30px;
+
+    outline:none;
+
+    transition:0.4s;
+
+    font-size:0.9rem;
+}
+
+/* 開いた時 */
+
+.search-area.active input{
+
+    width:180px;
+
+    opacity:1;
+
+    margin-right:10px;
+}
+
+/* 虫眼鏡 */
+
+.search-btn{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.2);
+}
+
+.search-btn:hover{
+
+    transform:scale(1.08);
+
+    background:#f0f0f0;
+}
+
+.material-symbols-outlined{
+
+    font-size:32px;
+
+    color:#00469b;
+}
+
+/* お知らせ */
+
+.live-news{
+
+    position:absolute;
+
+    top:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:10;
+
+    width:75%;
+
+    background:black;
+
+    border-radius:40px;
+
+    padding:14px 24px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* REALTIME NEWS */
+
+.live-label{
+
+    color:#00ff66;
+
+    font-family:monospace;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    letter-spacing:2px;
+}
+
+/* 流れる部分 */
+
+.news-scroll{
+
+    overflow:hidden;
+
+    flex:1;
+
+    white-space:nowrap;
+}
+
+/* 文字 */
+
+#news-text{
+
+    display:inline-block;
+
+    color:#00ff66;
+
+    font-family:monospace;
+
+    font-size:1.1rem;
+
+    font-weight:bold;
+
+    padding-left:100%;
+
+    animation:
+        newsMove 15s linear infinite;
+}
+
+/* アニメーション */
+
+@keyframes newsMove{
+
+    0%{
+
+        transform:
+            translateX(0);
+    }
+
+    100%{
+
+        transform:
+            translateX(-100%);
+    }
+}
+
+/* スマホ対応 */
+
+@media(max-width:768px){
+
+    /* タイトル */
+
+    .main-title{
+
+        font-size:2rem;
+
+        line-height:1.3;
+    }
+
+    .sub-title{
+
+        font-size:1rem;
+    }
+
+    /* 検索 */
+
+    .search-area{
+
+        top:10px;
+
+        right:10px;
+    }
+
+    .search-area.active input{
+
+        width:130px;
+    }
+
+    /* メニュー */
+
+    .top-menu{
+
+        flex-wrap:wrap;
+
+        gap:12px;
+
+        padding:0 10px;
+    }
+
+    .top-menu a{
+
+        font-size:0.9rem;
+    }
+
+    /* スライダー */
+
+    .slider{
+
+        width:95%;
+
+        height:220px;
+    }
+
+    /* お知らせ */
+
+    .live-news{
+
+        width:90%;
+
+        padding:10px 15px;
+    }
+
+    .live-label{
+
+        display:none;
+    }
+
+    #news-text{
+
+        font-size:0.9rem;
+    }
+
+    /* 開催日 */
+
+    .page-title{
+
+        font-size:2rem;
+    }
+
+    .schedule{
+
+        font-size:1.1rem;
+    }
+
+    /* カード */
+
+    .card{
+
+        width:130px;
+    }
+
+    .small-card{
+
+        width:90px;
+    }
+
+    /* ステージ */
+
+    .live-stage{
+
+        width:95%;
+    }
+
+    .stage-box{
+
+        width:90%;
+
+        max-width:320px;
+
+        padding:20px;
+    }
+
+    .stage-group{
+
+        font-size:1.5rem;
+    }
+
+}
+
+   </style>
+</head>
+<body>
+
+<header>
+
+<div class="header-top">
+
+    <h1 class="main-title">
+        南高祭2026
+    </h1>
+
+   <div class="search-area"
+id="searchArea">
+
+    <input
+    type="text"
+    id="searchBox"
+    placeholder="企画名・教室名">
+
+   <button
+class="search-btn"
+onclick="toggleSearch()">
+
+<span class="material-symbols-outlined">
+search
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+    <p class="sub-title">
+    一南去ってまた一南 〜終わらない祭り〜
+　　</p>
+
+    <nav class="top-menu">
+
+    <a href="access.html">交通アクセス</a>
+
+    <a href="stage.html">ステージ発表</a>
+
+    <a href="exhibition.html">展示一覧</a>
+
+    <a href="map.html">会場マップ</a>
+
+    <a href="rule.html">校内ルール</a>
+
+　　<a href="vacancy.html">空き情報</a>
+
+    <a href="login.html">管理者ログイン</a>
+
+</nav>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap" rel="stylesheet">
+</header>
+
+   <div class="slider">
+
+    <!-- お知らせ -->
+
+   <div class="live-news">
+
+    <div class="live-label">
+        REALTIME NEWS
+    </div>
+
+    <div class="news-scroll">
+
+        <div id="news-text">
+            読み込み中...
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- 画像 -->
+
+    <img
+    src="main1.jpg"
+    class="slide active">
+
+    <img
+    src="main2.jpg"
+    class="slide">
+
+    <img
+    src="main3.jpg"
+    class="slide">
+
+</div>
+
+<h2 class="page-title">開催日</h2>
+    <div class="schedule">
+
+    <p>7/4(土)　10:00〜15:30</p>
+
+    <p>7/5(日)　9:30〜13:00</p>
+
+</div>
+
+<main>
+
+    <div class="top-container">
+
+        <a href="access.html" class="card-link">
+            <div class="card">交通アクセス</div>
+        </a>
+
+        <a href="stage.html" class="card-link">
+            <div class="card">ステージ発表</div>
+        </a>
+
+        <a href="exhibition.html" class="card-link">
+            <div class="card">展示一覧</div>
+        </a>
+
+        <a href="map.html" class="card-link">
+            <div class="card">会場マップ</div>
+        </a>
+
+        <a href="vacancy.html" class="card-link">
+        <div class="card">空き情報</div>
+        </a>
+
+        <a href="rule.html" class="card-link">
+        <div class="card">校内ルール</div>
+        </a>
+
+    </div>
+
+    <div class="live-stage">
+
+   <div class="stage-box">
+
+    <div class="stage-label">
+        現在公演中（第一体育館）
+    </div>
+
+    <div
+        class="stage-group"
+        id="home-now-name">
+
+        読み込み中...
+
+    </div>
+
+    <div
+        class="stage-time"
+        id="home-now-time">
+
+    </div>
+
+</div>
+
+<div class="stage-box">
+
+    <div class="stage-label">
+        次の公演（第一体育館）
+    </div>
+
+    <div
+        class="stage-group"
+        id="home-next-name">
+
+        読み込み中...
+
+    </div>
+
+    <div
+        class="stage-time"
+        id="home-next-time">
+
+    </div>
+
+</div>
+
+</div>
+
+</main>
+
+    <script type="module">
+
+    import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "ここ",
+
+authDomain: "ここ",
+
+projectId: "ここ",
+
+storageBucket: "ここ",
+
+messagingSenderId: "ここ",
+
+appId: "ここ",
+
+databaseURL:
+"https://nankousai2026-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+const slides =
+    document.querySelectorAll(".slide");
+
+let current = 0;
+
+function changeSlide() {
+
+    slides[current]
+        .classList.remove("active");
+
+    current++;
+
+    if(current >= slides.length) {
+
+        current = 0;
+    }
+
+    slides[current]
+        .classList.add("active");
+}
+
+setInterval(changeSlide, 2500);
+
+window.toggleSearch = function(){
+
+    const area =
+        document.getElementById("searchArea");
+
+    area.classList.toggle("active");
+}
+
+window.searchSite = function(){
+
+    const box =
+        document.getElementById("searchBox");
+
+    /* 閉じてたら開く */
+
+    if(
+        !document
+        .getElementById("searchArea")
+        .classList.contains("active")
+    ){
+
+        toggleSearch();
+
+        box.focus();
+
+        return;
+    }
+
+    const word = box.value;
+
+    /* 展示 */
+
+    if(
+        word.includes("305") ||
+        word.includes("3年5組") ||
+        word.includes("お化け屋敷")
+    ){
+
+        location.href =
+            "3f.html";
+    }
+
+    /* ステージ */
+
+    else if(
+        word.includes("軽音")
+    ){
+
+        location.href =
+            "stage.html";
+    }
+
+    /* 空き情報 */
+
+    else if(
+        word.includes("待ち時間")
+    ){
+
+        location.href =
+            "vacancy.html";
+    }
+
+    else{
+
+        alert("見つかりませんでした");
+    }
+}
+
+document
+.getElementById("searchBox")
+.addEventListener("keydown",function(e){
+
+    if(e.key === "Enter"){
+
+        searchSite();
+    }
+});
+
+/* リアルタイムお知らせ */
+
+const newsRef =
+    ref(db,"news");
+
+onValue(newsRef,(snapshot)=>{
+
+    const data =
+        snapshot.val();
+
+    if(!data){
+
+        document
+        .getElementById("news-text")
+        .innerText =
+        "現在お知らせはありません";
+
+        return;
+    }
+
+    const newsArray =
+        Object.values(data);
+
+    const texts =
+        newsArray.map(n => n.text);
+
+    document
+    .getElementById("news-text")
+    .innerText =
+        texts.join("　◆　");
+});
+
+/* ホームのステージ表示 */
+
+const stageRef =
+    ref(db,"stage");
+
+onValue(stageRef,(snapshot)=>{
+
+    const data =
+        snapshot.val();
+
+    if(!data) return;
+
+    updateHomeStage(data);
+});
+
+function timeToMinutes(time){
+
+    const clean =
+        time.trim();
+
+    const [h,m] =
+        clean.split(":");
+
+    return Number(h) * 60
+         + Number(m);
+}
+
+function updateHomeStage(stages){
+
+    const now = new Date();
+
+    const month =
+        now.getMonth() + 1;
+
+    const date =
+        now.getDate();
+
+    const today =
+        month + "/" + date;
+
+    let todayStages = [];
+
+    /* day1 / day2 判定 */
+
+    if(today === "7/4"){
+
+        todayStages =
+            Object.values(stages.day1 || []);
+
+    }else if(today === "7/5"){
+
+        todayStages =
+            Object.values(stages.day2 || []);
+    }
+
+    todayStages.sort((a,b)=>{
+
+    const aStart =
+        a.time.split("〜")[0];
+
+    const bStart =
+        b.time.split("〜")[0];
+
+    return timeToMinutes(aStart)
+         - timeToMinutes(bStart);
+});
+
+   if(todayStages.length === 0){
+
+    document
+    .getElementById("home-now-name")
+    .innerText =
+    "本日の公演はありません";
+
+    document
+    .getElementById("home-now-time")
+    .innerText = "";
+
+    document
+    .getElementById("home-next-name")
+    .innerText =
+    "本日の公演はありません";
+
+    document
+    .getElementById("home-next-time")
+    .innerText = "";
+
+    return;
+}
+
+    const currentMinutes =
+        now.getHours() * 60
+      + now.getMinutes();
+
+    let current =
+        null;
+
+    let next =
+        null;
+
+    for(let i = 0; i < todayStages.length; i++){
+
+        const stage =
+            todayStages[i];
+
+        const parts =
+            stage.time.split("〜");
+
+        const start =
+            timeToMinutes(parts[0]);
+
+        const end =
+            timeToMinutes(parts[1]);
+
+        if(
+            currentMinutes >= start &&
+            currentMinutes < end
+        ){
+
+            current = stage;
+
+            next =
+                todayStages[i + 1];
+
+            break;
+        }
+
+        if(currentMinutes < start){
+
+            next = stage;
+
+            break;
+        }
+    }
+
+    /* 現在 */
+
+    if(current){
+
+        document
+        .getElementById("home-now-name")
+        .innerText =
+            current.name;
+
+        document
+        .getElementById("home-now-time")
+        .innerText =
+            current.time;
+
+    }else{
+
+        document
+        .getElementById("home-now-name")
+        .innerText =
+            "現在公演はありません";
+
+        document
+        .getElementById("home-now-time")
+        .innerText = "";
+    }
+
+    /* 次 */
+
+    if(next){
+
+        document
+        .getElementById("home-next-name")
+        .innerText =
+            next.name;
+
+        document
+        .getElementById("home-next-time")
+        .innerText =
+            next.time;
+
+    }else{
+
+        document
+        .getElementById("home-next-name")
+        .innerText =
+            "本日の公演は終了しました";
+
+        document
+        .getElementById("home-next-time")
+        .innerText = "";
+    }
+}
+
+</script>
+</body>
+</html>
