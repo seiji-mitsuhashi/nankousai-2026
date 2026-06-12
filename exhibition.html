@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>展示一覧 | 南高祭2026</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap"
+rel="stylesheet">
+
+<style>
+
+body{
+
+    margin:0;
+
+    background:#f5f7fb;
+
+    font-family:sans-serif;
+}
+
+/* ヘッダー */
+
+.page-header{
+
+    background:#00469b;
+
+    padding:15px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.site-title{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:2rem;
+
+    font-family:
+        "Yuji Syuku",
+        serif;
+}
+
+.menu-button{
+
+    color:white;
+
+    font-size:2rem;
+
+    cursor:pointer;
+}
+
+/* メニュー */
+
+#menu{
+
+    display:none;
+
+    position:absolute;
+
+    top:70px;
+
+    right:20px;
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    z-index:9999;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.2);
+}
+
+#menu a{
+
+    display:block;
+
+    padding:15px 30px;
+
+    color:#00469b;
+
+    text-decoration:none;
+}
+
+#menu a:hover{
+
+    background:#00469b;
+
+    color:white;
+}
+
+/* タイトル */
+
+.page-title{
+
+    text-align:center;
+
+    color:#00469b;
+
+    margin-top:40px;
+
+    font-size:2.5rem;
+}
+
+/* 検索 */
+
+.search-box{
+
+    width:90%;
+
+    max-width:600px;
+
+    display:block;
+
+    margin:30px auto;
+
+    padding:15px;
+
+    font-size:1rem;
+
+    border-radius:15px;
+
+    border:1px solid #ccc;
+}
+
+/* フィルター */
+
+.filter-area{
+
+    width:90%;
+
+    margin:auto;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    justify-content:center;
+}
+
+.filter-btn{
+
+    border:none;
+
+    background:white;
+
+    padding:10px 20px;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 2px 8px rgba(0,0,0,0.1);
+}
+
+.filter-btn.active{
+
+    background:#00469b;
+
+    color:white;
+}
+
+/* カード一覧 */
+
+.card-area{
+
+    width:95%;
+
+    margin:40px auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(350px,1fr));
+
+    gap:30px;
+}
+
+/* カード */
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.15);
+}
+
+.card img{
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+}
+
+.card-body{
+
+    padding:20px;
+}
+
+.card-title{
+
+    font-size:1.7rem;
+
+    color:#00469b;
+
+    font-weight:bold;
+}
+
+.tag{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    margin-right:5px;
+
+    background:#00469b;
+
+    color:white;
+
+    padding:5px 12px;
+
+    border-radius:999px;
+
+    font-size:0.9rem;
+}
+
+.info{
+
+    margin-top:15px;
+
+    line-height:1.8;
+}
+
+.description{
+
+    margin-top:15px;
+
+    color:#555;
+}
+
+.go-button{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    background:#00469b;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+}
+
+.go-button:hover{
+
+    background:#00357a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="page-header">
+
+<a href="index.html"
+class="site-title">
+
+南高祭2026
+
+</a>
+
+<div class="menu-button"
+onclick="toggleMenu()">
+
+☰
+
+</div>
+
+</header>
+
+<nav id="menu">
+
+<a href="index.html">ホーム</a>
+
+<a href="access.html">交通アクセス</a>
+
+<a href="map.html">会場マップ</a>
+
+<a href="stage.html">ステージ発表</a>
+
+<a href="exhibition.html">展示一覧</a>
+
+<a href="vacancy.html">空き情報</a>
+
+<a href="rule.html">校内ルール</a>
+
+</nav>
+
+<h1 class="page-title">
+
+展示一覧
+
+</h1>
+
+<input
+type="text"
+id="search"
+class="search-box"
+placeholder="展示名・団体名で検索">
+
+<div class="filter-area">
+
+<button class="filter-btn">アトラクション</button>
+
+<button class="filter-btn">飲食店</button>
+
+<button class="filter-btn">1年生</button>
+
+<button class="filter-btn">2年生</button>
+
+<button class="filter-btn">3年生</button>
+
+<button class="filter-btn">部活動</button>
+
+</div>
+
+<div
+class="card-area"
+id="cardArea">
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey:"ここ",
+authDomain:"ここ",
+projectId:"ここ",
+storageBucket:"ここ",
+messagingSenderId:"ここ",
+appId:"ここ",
+
+databaseURL:
+"https://nankousai2026-default-rtdb.asia-southeast1.firebasedatabase.app"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+const exhibitions = [
+
+{
+name:"ジュラシック・ワールド/南の大地",
+category:"アトラクション",
+grade:"3年生",
+room:"3F8",
+className:"305",
+summary:"君はもう、ただの観客じゃない！ようこそジュラシックワールドの南の大地へ！",
+image:"3F8-3B 305 ジュラシックワールド・南の大地.jpg",
+url:""
+},
+
+{
+name:"語学・言語学研究会",
+category:"部活動",
+grade:"部活動",
+room:"5F2教室",
+className:"",
+summary:"言葉を通じて様々な文化に触れてみませんか？HR発表の待ち時間に解けるクイズも配っています！",
+image:"5F2 語学・言語学研究会.jpg"
+},
+
+{
+name:"クイズ研究会",
+category:"部活動",
+grade:"部活動",
+room:"3F5",
+className:"",
+summary:"あなたの知力を試してみませんか？クイズはいつでもあなたを待っています。",
+image:"5F5 クイズ研究会　.jpg"
+},
+
+{
+name:"科学部",
+category:"部活動",
+grade:"部活動",
+room:"化学教室",
+className:"",
+summary:"信号反応や炎色反応など面白く美しい実験、楽しい工作で南高祭の思い出をつくりましょう！",
+image:"2F化学教室　科学部.jpg"
+},
+
+{
+name:"茶道部",
+category:"部活動",
+grade:"部活動",
+room:"作法室",
+className:"",
+summary:"おいしいお茶とお菓子はいかがですか？いっしょに茶道を楽しみましょう。",
+image:"2F 作法室　茶道部.jpg"
+},
+
+{
+name:"華道部",
+category:"部活動",
+grade:"部活動",
+room:"2Fホール",
+className:"",
+summary:"華道部では、部員全員でお花を使った作品を製作しました。涼やかなお花たちをぜひご覧ください！",
+image:"2Fホール　華道部 6月5.jpg"
+},
+
+{
+name:"プログラミング研究会",
+category:"部活動",
+grade:"部活動",
+room:"情報教室",
+className:"",
+summary:"札南プログラミングコンテストを開催中。初心者向けプログラミング体験も。ぜひお越しください。",
+image:"2Fホール　華道部 6月5.jpg"
+},
+
+{
+name:"よろずや同好会",
+category:"部活動",
+grade:"部活動",
+room:"5F6",
+className:"",
+summary:"ボランティアの力でつながる、よろずや☓元気ショップ！活動に参加してクッキーをGETしよう！",
+image:"5F6 よろずや同好会.jpg"
+},
+
+{
+name:"漫画・アニメーション研究部",
+category:"部活動",
+grade:"部活動",
+room:"物理教室",
+className:"",
+summary:"大人気タトゥーシール・缶バッジイラスト満載の部誌・個人ブースそのすべてが、2F物理教室に。",
+image:"2F物理教室　漫画アニメーション研究部.jpg"
+},
+
+{
+name:"古本市",
+category:"部活動",
+grade:"図書局",
+room:"図書室",
+className:"",
+summary:"珍しい本、話題になった本、なつかしのあの本も。涼しい図書館でお待ちしております。",
+image:"1F 図書館.jpg"
+},
+
+{
+name:"生物研究会",
+category:"部活動",
+grade:"部活動",
+room:"生物教室",
+className:"",
+summary:"2階生物室にては虫類、両生類や昆虫の生体、標本を展示しています。気軽に足を運んでください!!",
+image:"2F生物室 生物研究会.jpg"
+},
+
+{ 
+name:"書道部",
+category:"部活動",
+grade:"部活動",
+room:"書道教室",
+className:"",
+summary:"ご希望の文字を葉書に筆で書いて無料でお渡しします。ぜひ1F書道教室にお越しください！",
+image:"書道部.png"
+},  
+
+{
+name:"Mオケ",
+category:"部活動",
+grade:"部活動",
+room:"音楽室",
+className:"",
+summary:"音楽室で小さなコンサートを開催します。音楽に興味のある方はぜひお気軽にお立ち寄りください！",
+image:"3F音楽教室 Mオケ.jpg",
+url:"moke.html"
+},
+
+{
+name:"メイドの土産101",
+category:"飲食店",
+grade:"1年生",
+room:"5F7",
+className:"101",
+summary:"おいしいお食事と可愛いメイドが御主人様を冥土にお連れします♡",
+image:"5f7 101 メイドの土産101.jpg"
+},
+
+{
+name:"SOUTHBUCKS〜縁日を添えて〜",
+category:"縁日",
+grade:"1年生",
+room:"4F3教室",
+className:"102",
+summary:"夏といえば縁日！学祭といえばカフェ！ここに来れば夏も学祭も満喫できます！",
+image:"4F3 102 SOUTHBUCKS～縁日を添えて～.jpg"
+},
+
+{
+name:"cafe.KOREYA",
+category:"飲食店",
+grade:"1年生",
+room:"3F3",
+className:"103",
+summary:"ここは⋯韓国！韓国の美味しい食べ物やめちゃめちゃかわいい(？)がつまって夢のような空間です",
+image:"3F3 103 cafe.KOREYA.jpg"
+},
+
+{
+name:"佐々木屋敷",
+category:"お化け屋敷",
+grade:"1年生",
+room:"3F4",
+className:"104",
+summary:"一度入ればもう戻れない。恐怖のおもてなしを体験せよ。",
+image:"618125485435781721.jpg"
+},
+
+{
+name:"いちご神宮祭",
+category:"飲食店",
+grade:"1年生",
+room:"4F4",
+className:"105",
+summary:"105にちなんで”いちご”！！映えもおいしさも甘酸っぱくお届けします！ぜひ参詣されよ！",
+image:"4F4 105 いちご神宮祭.jpg"
+},
+
+{
+name:"鶏の鶏による焼き鳥のために焼き鳥屋",
+category:"飲食店",
+grade:"1年生",
+room:"ドーム下",
+className:"106",
+summary:"焼き鳥などの串を、低い価格で販売します！ぜひ食べに来てください！",
+image:"ドーム下南東 106 鶏の鶏による焼き鳥のための焼き鳥屋.jpg"
+},
+
+{
+name:"BAR♤BAR",
+category:"飲食店",
+grade:"1年生",
+room:"3F1",
+className:"107",
+summary:"皆さん、ギャンブルしたくないですか？ここ”合法”ですよ！誰に睨まれることもなくかけ放題",
+image:"3F1 107 BAR♠BAR.jpg"
+},
+
+{
+name:"煩悩寺の変",
+category:"飲食店",
+grade:"1年生",
+room:"3F2",
+className:"108",
+summary:"ここは、数々の煩悩と人魂が集う場所。個性豊かな幽霊に囲まれながらのお食事はいかが？",
+image:"3F2 108 煩悩寺の変　6月5日.jpg"
+},
+
+{
+name:"Dubai Cacao Lab",
+category:"飲食店",
+grade:"2年生",
+room:"4Fホール",
+className:"201",
+summary:"ドバイチョコ餅＆チョコレートパフェ…⋯ひとくちでドバイへ",
+image:"4Fホール 201 Dubai Cacao Lab.jpg"
+},
+
+{
+name:"タピなん",
+category:"飲食店",
+grade:"2年生",
+room:"4F2",
+className:"202",
+summary:"札南でインスタ映え間違いなしのかわいいタピオカとスイーツのお店がOPEN！4F2に来てねー",
+image:"4F2 202 タピなん.jpg"
+},
+
+{
+name:"青春、挟みました。",
+category:"飲食店",
+grade:"2年生",
+room:"ドーム下",
+className:"203",
+summary:"青春をぎゅっと挟み込んだハンバーガー。きっとこれも青春の1ページに。",
+image:"ドーム下南西(203) 青春、挟みました。.jpg"
+},
+
+{
+name:"(札)南の島",
+category:"飲食店",
+grade:"2年生",
+room:"ドーム下",
+className:"204",
+summary:"今日は、ジャンボリー！キンキンの甘酸っぱいトロピカルジュースがあなたを待っている！！",
+image:"ドーム下北東 204 (札)南の島.jpg"
+},
+
+{
+name:"ワッフる？",
+category:"飲食店",
+grade:"2年生",
+room:"4F5",
+className:"205",
+summary:"【映えメ味】トッピングを選べるあなただけのカスタムワッフル。甘い青春、召し上がれ！",
+image:"4F5 205 ワッフる.jpg"
+},
+
+{
+name:"JOY STORY AQUA!",
+category:"アトラクション",
+grade:"2年生",
+room:"4F6",
+className:"206",
+summary:"前代未聞！水鉄砲を使った射撃ゲーム！おもちゃの世界に飛び込んでLet's shoot！",
+image:"4F6 (206) JOY STORY AQUA .jpg"
+},
+
+{
+name:"一ナン食ってまた一ナン〜終わらない食事〜",
+category:"飲食店",
+grade:"2年生",
+room:"3Fホール",
+className:"207",
+summary:"何だろうこの店…なんの店…ナンの店…あ！ナンの店！",
+image:"3Fホール 207 一ナン食ってまた一ナン~終わらない食事~.jpg"
+},
+
+{
+name:"You're John",
+category:"飲食店",
+grade:"2年生",
+room:"4F7",
+className:"208",
+summary:"わぁーたいへんだーあつくてとけちゃうよ〜。んーと、ぼぉくとヨアジョンたべにいこう！",
+image:"4F7(208) You’re John.jpg"
+},
+
+{
+name:"ミゲルのタコライス屋〜死者の視界へようこそ〜",
+category:"飲食店",
+grade:"3年生",
+room:"3F6",
+className:"301",
+summary:"死者の世界でしか味わえない特別なタコライス。あなたもきっと虜に。ぜひご賞味あれ！",
+image:"3F6 301 ミゲルのタコライス屋～死者の世界へようこそ.jpg"
+},
+
+{
+name:"記鐿(きろく/きおく)",
+category:"お化け屋敷",
+grade:"3年生",
+room:"5F8",
+className:"302",
+summary:"無惨に殺された幼馴染。真紅に染まった事故現場。残された抵抗の痕。今甦るあの日の記鐿",
+image:"5F8-5B 302 記憶記録.JPG"
+},
+
+{
+name:"あそぼ",
+category:"お化け屋敷",
+grade:"3年生",
+room:"3F5",
+className:"303",
+summary:"303には楽しいお友達がいっぱい！303には楽しいお友達がいっぱい！303には楽しいお友達",
+image:"3F5 303 あそぼ.jpg"
+},
+
+{
+name:"御神馬の暴走",
+category:"アトラクション",
+grade:"3年生",
+room:"4F1",
+className:"304",
+summary:"日本の古式馬術である流鏑馬。佐々木流を継ぎし者、いざ出陣",
+image:"4F1-4A 304 御神馬の暴走.jpg"
+},
+
+{
+name:"Good time, One mazesoba",
+category:"飲食店",
+grade:"3年生",
+room:"3F7",
+className:"306",
+summary:"Good time, One Mazesoba。グットたいわんまぜそば。市場の一杯で素敵な時間を、あなたに。",
+image:"3F7 306 Good time.One mazesoba.jpg"
+},
+
+{
+name:"黎明饗宴",
+category:"お化け屋敷",
+grade:"3年生",
+room:"5F1",
+className:"307",
+summary:"洋館に何か用かん？一用のある人もない人もまた違った「涼」を求めに来てみては……",
+image:"5F1-A 307 黎明饗宴.jpg"
+},
+
+{
+name:"海底308万マイル",
+category:"アトラクション",
+grade:"3年生",
+room:"4F8",
+className:"308",
+summary:"海底308万マイル、そこには僅かな光も届かない神秘の世界。潜水艇でいざ出発！隠れマッスーもいるよ",
+image:"308_海底308万マイル.JPG"
+}
+
+];
+
+let vacancyData = {};
+
+let activeFilters = [];
+
+function createCards(){
+
+let html = "";
+
+const keyword =
+document
+.getElementById("search")
+.value
+.toLowerCase();
+
+const sortedExhibitions =
+[...exhibitions].sort((a,b)=>
+a.name.localeCompare(
+b.name,
+"ja"
+));
+
+const filteredExhibitions =
+sortedExhibitions.filter(item=>{
+
+const matchKeyword =
+
+item.name
+.toLowerCase()
+.includes(keyword)
+
+||
+
+item.summary
+.toLowerCase()
+.includes(keyword)
+
+||
+
+item.room
+.toLowerCase()
+.includes(keyword);
+
+const matchFilter =
+
+activeFilters.length === 0
+
+||
+
+activeFilters.includes(item.category)
+
+||
+
+activeFilters.includes(item.grade);
+
+return matchKeyword && matchFilter;
+
+});
+
+filteredExhibitions.forEach(item=>{
+
+html += `
+
+<div class="card">
+
+<img src="${item.image}">
+
+<div class="card-body">
+
+<div class="card-title">
+${item.name}
+</div>
+
+<div class="tag">
+${item.category}
+</div>
+
+<div class="tag">
+${item.grade}
+</div>
+
+<div class="info">
+
+🏫 ${item.room}<br>
+
+⏰ ${getWaitTime(item.className)}
+
+</div>
+
+<div class="description">
+${item.summary}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document
+.getElementById("cardArea")
+.innerHTML = html;
+
+}
+
+const vacancyRef =
+ref(db,"vacancy");
+
+onValue(vacancyRef,(snapshot)=>{
+
+vacancyData =
+snapshot.val() || {};
+
+createCards();
+
+});
+
+document
+.querySelectorAll(".filter-btn")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const filter =
+button.innerText;
+
+if(activeFilters.includes(filter)){
+
+activeFilters =
+activeFilters.filter(
+f => f !== filter
+);
+
+button.classList.remove("active");
+
+}else{
+
+activeFilters.push(filter);
+
+button.classList.add("active");
+
+}
+
+createCards();
+
+});
+
+});
+
+function toggleMenu(){
+
+const menu =
+document.getElementById("menu");
+
+menu.style.display =
+menu.style.display === "block"
+? "none"
+: "block";
+
+}
+
+function getWaitTime(className){
+
+if(!className){
+
+return "待ち時間なし";
+
+}
+
+const item =
+vacancyData[className];
+
+if(!item){
+
+return "ーーー";
+
+}
+
+return "約" + item.waitTime + "分";
+
+}
+
+document
+.getElementById("search")
+.addEventListener(
+"input",
+createCards
+);
+
+</script>
+
+</body>
+</html>
