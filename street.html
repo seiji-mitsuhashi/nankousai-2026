@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>ストリート発表 | 南高祭2026</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap"
+ 
+rel="stylesheet">
+
+<style>
+
+body{
+
+margin:0;
+background:#f5f7fb;
+font-family:sans-serif;
+
+}
+
+/* ヘッダー */
+
+.page-header{
+
+background:#00469b;
+padding:15px 30px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+/* タイトル */
+
+.site-title {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 2rem;
+
+    font-family:
+        "Yuji Syuku",
+        serif;
+
+    transition: 0.3s;
+}
+
+.site-title:hover {
+
+    color: #dbe8ff;
+}
+
+.page-title{
+
+text-align:center;
+color:#00469b;
+margin-top:40px;
+font-size:2.5rem;
+
+}
+
+/* 三本線 */
+
+.menu-button {
+
+color:white;
+
+font-size:2rem;
+
+cursor:pointer;
+
+user-select:none;
+
+transition:
+color 0.3s,
+transform 0.3s;
+}
+
+.menu-button:hover {
+
+color:yellow;
+
+transform:scale(1.2);
+}
+
+#menu {
+
+display:none;
+
+background:white;
+
+position:absolute;
+
+top:70px;
+right:20px;
+
+border-radius:12px;
+
+box-shadow:
+0 5px 15px rgba(0,0,0,0.2);
+
+overflow:hidden;
+
+z-index:9999;
+}
+
+#menu a {
+
+display:block;
+
+padding:15px 30px;
+
+color:#00469b;
+
+text-decoration:none;
+}
+
+#menu a:hover {
+
+background:#00469b;
+
+color:white;
+}
+
+/* 現在・次回 */
+
+.status-area{
+
+width:90%;
+max-width:900px;
+
+margin:40px auto;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:20px;
+
+}
+
+.status-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:
+0 5px 15px rgba(0,0,0,0.15);
+
+text-align:center;
+
+}
+
+.status-label{
+
+font-size:1.3rem;
+
+font-weight:bold;
+
+color:#00469b;
+
+margin-bottom:15px;
+
+}
+
+.status-name{
+
+font-size:2rem;
+
+font-weight:bold;
+
+}
+
+.status-time{
+
+margin-top:10px;
+
+color:#666;
+
+}
+
+/* スケジュール */
+
+.schedule{
+
+width:90%;
+max-width:900px;
+
+margin:40px auto;
+
+}
+
+.day-title{
+
+font-size:2rem;
+
+color:#00469b;
+
+margin:40px 0 20px;
+
+}
+
+.event{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-radius:15px;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,0.1);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.event-time{
+
+font-weight:bold;
+
+color:#00469b;
+
+}
+
+.event-name{
+
+font-size:1.2rem;
+
+}
+
+.event{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-radius:15px;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,0.1);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+}
+
+.event-catch{
+
+margin-top:8px;
+
+font-size:0.9rem;
+
+color:#666;
+
+line-height:1.5;
+
+max-width:500px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="page-header">
+
+<a href="index.html"
+class="site-title">
+
+南高祭2026
+
+</a>
+
+<div class="menu-button"
+onclick="toggleMenu()">
+
+☰
+
+</div>
+
+</header>
+
+<nav id="menu">
+
+<a href="index.html">ホーム</a>
+
+<a href="access.html">交通アクセス</a>
+
+<a href="stage.html">ステージ発表</a>
+
+<a href="street.html">ストリート発表</a>
+
+<a href="exhibition.html">展示一覧</a>
+
+<a href="map.html">会場マップ</a>
+
+<a href="vacancy.html">空き情報</a>
+
+<a href="rule.html">校内ルール</a>
+
+</nav>
+
+<h1 class="page-title">
+
+ストリート発表
+
+</h1>
+
+<div class="status-area">
+
+<div class="status-card">
+
+<div class="status-label">
+
+🟢 現在公演中
+
+</div>
+
+<div
+class="status-name"
+id="currentName">
+
+なし
+
+</div>
+
+<div
+class="status-time"
+id="currentTime">
+
+</div>
+
+</div>
+
+<div class="status-card">
+
+<div class="status-label">
+
+▶ 次回公演
+
+</div>
+
+<div
+class="status-name"
+id="nextName">
+
+なし
+
+</div>
+
+<div
+class="status-time"
+id="nextTime">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="schedule">
+
+<div class="day-title">
+
+7/4(土)
+
+</div>
+
+<div id="day1"></div>
+
+<div class="day-title">
+
+7/5(日)
+
+</div>
+
+<div id="day2"></div>
+
+</div>
+
+<script>
+
+const schedule = [
+
+{
+date:"2026-07-04",
+start:"10:15",
+end:"10:45",
+name:"書道部",
+catch:"ヒゲダンの「らしさ」に合わせて書道パフォーマンスします！私達の勇姿をご覧あれ！！"
+},
+
+{
+date:"2026-07-04",
+start:"11:10",
+end:"11:40",
+name:"あそぶらす",
+catch:"吹奏楽部3年生16人によるPOPなストリートライブです。音で遊んで楽しく演奏します！"
+},
+
+{
+date:"2026-07-04",
+start:"11:45",
+end:"12:15",
+name:"チョッキーラップス Season2",
+catch:"吹部6人で結成されたストリートバンド。今年も玄関ホールで音を奏でる！"
+},
+
+{
+date:"2026-07-04",
+start:"12:20",
+end:"12:50",
+name:"SAM",
+catch:"急遽、結成された吹部3年3人バンド。B.Sax、Cl、Trpであの有名な曲をお届けします！"
+},
+
+{
+date:"2026-07-04",
+start:"13:00",
+end:"13:30",
+name:"合唱部",
+catch:"夏らしく爽やかな合唱曲とポップスをおとどけします。35人でつくる合唱をお楽しみください♪"
+},
+
+{
+date:"2026-07-04",
+start:"13:40",
+end:"14:10",
+name:"中尾壮佑 solo",
+catch:"ギターとマイクだけを持って、弾き語る。オリジナル曲を演奏する可能性も非常に高い…"
+},
+
+{
+date:"2026-07-04",
+start:"14:15",
+end:"14:45",
+name:"TOYA.",
+catch:"マイクを使ったビートボックスパフォーマンスです。南高祭で最高に盛り上がりましょう！！"
+},
+
+{
+date:"2026-07-05",
+start:"09:45",
+end:"10:15",
+name:"書道部",
+catch:"やぁみんな俺達書道部だZE☆今年も3年だけのパフォーマンスを1階ホールでやりますねぇ！"
+},
+
+{
+date:"2026-07-05",
+start:"10:25",
+end:"10:55",
+name:"美術部",
+catch:"描くって楽しい！！その場でアートが生まれる瞬間をぜひ見届けてください！"
+},
+
+{
+date:"2026-07-05",
+start:"12:10",
+end:"12:40",
+name:"男声合唱団六華",
+catch:"六華の六は技巧と努力と個性に残りは気合・スゴ味・ド迫力！？暑さも吹き飛ぶ歌をお届けします。"
+}
+
+];
+
+function renderSchedule(){
+
+let day1 = "";
+let day2 = "";
+
+schedule.forEach(item=>{
+
+const html = `
+
+<div class="event">
+
+<div>
+
+<div class="event-name">
+${item.name}
+</div>
+
+<div class="event-catch">
+${item.catch || ""}
+</div>
+
+</div>
+
+<div class="event-time">
+${item.start}〜${item.end}
+</div>
+
+</div>
+
+`;
+
+if(item.date==="2026-07-04"){
+
+day1 += html;
+
+}else{
+
+day2 += html;
+
+}
+
+});
+
+document
+.getElementById("day1")
+.innerHTML = day1;
+
+document
+.getElementById("day2")
+.innerHTML = day2;
+
+}
+
+function updateNow(){
+
+const now =
+new Date();
+
+let current = null;
+let next = null;
+
+for(const item of schedule){
+
+const start =
+new Date(
+item.date+"T"+item.start
+);
+
+const end =
+new Date(
+item.date+"T"+item.end
+);
+
+if(now >= start &&
+now <= end){
+
+current = item;
+
+}
+
+if(now < start){
+
+next = item;
+break;
+
+}
+
+}
+
+if(current){
+
+document
+.getElementById("currentName")
+.innerText =
+current.name;
+
+document
+.getElementById("currentTime")
+.innerText =
+current.start +
+"〜" +
+current.end;
+
+}
+
+if(next){
+
+document
+.getElementById("nextName")
+.innerText =
+next.name;
+
+document
+.getElementById("nextTime")
+.innerText =
+next.start +
+"〜" +
+next.end;
+
+}
+
+}
+
+renderSchedule();
+
+updateNow();
+
+setInterval(
+updateNow,
+60000
+);
+
+window.toggleMenu = function(){
+
+const menu =
+document.getElementById("menu");
+
+if(menu.style.display === "block"){
+
+menu.style.display = "none";
+
+}else{
+
+menu.style.display = "block";
+}
+
+}
+
+document.addEventListener("click",(e)=>{
+
+const menu =
+document.getElementById("menu");
+
+const button =
+document.querySelector(".menu-button");
+
+if(
+!menu.contains(e.target)
+&&
+!button.contains(e.target)
+){
+
+menu.style.display = "none";
+}
+
+});
+
+</script>
+
+</body>
+</html>
